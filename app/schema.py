@@ -12,6 +12,10 @@ class UserRead(BaseModel):
     name: str
     email: str
     is_active: bool
+
+class NoteCreate(BaseModel):
+    title: str
+    content: str
     
 class NoteUpdate(BaseModel):
     title: Optional[str] = None
