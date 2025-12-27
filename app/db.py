@@ -9,3 +9,7 @@ AsyncSessionLocal = async_sessionmaker(autocommit=False, autoflush=False, bind=e
 
 class Base(DeclarativeBase):
     pass
+
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        yield session
