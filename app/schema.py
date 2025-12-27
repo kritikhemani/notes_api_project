@@ -6,3 +6,9 @@ class UserCreate(BaseModel):
     name: str
     email: str
     password: str
+    
+class UserRead(BaseModel):
+    id: int
+    name: str
+    email: str
+    is_active: bool
