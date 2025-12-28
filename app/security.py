@@ -19,3 +19,6 @@ def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
     now = datetime.utcnow()
     payload = {"sub": str(user_id), "type": token_type, "exp": now + expires}
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+def create_access_token(user_id: int) -> str:
+    return create_token(user_id, "access", timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
