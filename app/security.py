@@ -15,3 +15,7 @@ def hash_password(password: str) -> str:
 def verify_password(password: str, hashed: str) -> bool:
     return pwd_context.verify(password, hashed)
 
+def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
+    now = datetime.utcnow()
+    payload = {"sub": str(user_id), "type": token_type, "exp": now + expires}
+    return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
