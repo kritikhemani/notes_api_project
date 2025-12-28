@@ -1,16 +1,14 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 
     
 class UserCreate(BaseModel):
-    name: str
-    email: str
+    email: EmailStr
     password: str
     
 class UserRead(BaseModel):
     id: int
-    name: str
-    email: str
+    email: EmailStr
     is_active: bool
 
 class NoteCreate(BaseModel):
