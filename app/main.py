@@ -12,3 +12,6 @@ app = FastAPI(title="Notes API")
 def home():
     return {"message": "Welcome to the Notes API!"}
 
+app.include_router(auth_router)
+app.include_router(notes_router)
+
