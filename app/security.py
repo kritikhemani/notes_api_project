@@ -26,3 +26,5 @@ def create_access_token(user_id: int) -> str:
 def create_refresh_token(user_id: int) -> str:
     return create_token(user_id, "refresh", timedelta(days=REFRESH_EXPIRES_DAYS))
 
+def decode_token(token: str) -> dict:
+    return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
