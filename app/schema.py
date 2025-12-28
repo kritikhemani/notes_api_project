@@ -14,12 +14,12 @@ class UserCreate(BaseModel):
     
 class UserRead(BaseModel):
     id: int
-    name: str
     email: EmailStr
     is_active: bool
     
     class Config:
         from_attributes = True
+        orm_mode = True
 
 class NoteCreate(BaseModel):
     title: str

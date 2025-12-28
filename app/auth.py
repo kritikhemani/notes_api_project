@@ -25,7 +25,7 @@ def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get
     user = db.query(User).filter(User.email == form.username).first()
     if not user or not verify_password(form.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    return Token(access_token=create_access_token(user.id), refresh_token=create_refresh_token(user.id))
+    return Token(access_token=create_access_token(user.id), refresh_token=create_refresh_token(user.id), token_type="bearer")
 
 @router.post("/refresh", response_model=Token)
 def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
