@@ -4,7 +4,7 @@ from app.models import User
 from app.database import get_db
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from app.security import hash_password, create_access_token, create_refresh_token, decode_token
+from app.security import hash_password, create_access_token, create_refresh_token, decode_token, verify_password
 
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -19,3 +19,11 @@ def register(payload: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+@router.post("/login", response_model=Token)
+def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == form.username).first()
+    if not user or not verify_password(form.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return Token(access_token=create_access_token(user.id), refresh_token=create_refresh_token(user.id))
+
