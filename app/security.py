@@ -22,3 +22,7 @@ def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
 
 def create_access_token(user_id: int) -> str:
     return create_token(user_id, "access", timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+
+def create_refresh_token(user_id: int) -> str:
+    return create_token(user_id, "refresh", timedelta(days=REFRESH_EXPIRES_DAYS))
+
