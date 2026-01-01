@@ -19,7 +19,6 @@ class UserRead(BaseModel):
     
     class Config:
         from_attributes = True
-        orm_mode = True
 
 class NoteCreate(BaseModel):
     title: str
