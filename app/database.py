@@ -13,9 +13,6 @@ AsyncSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine,
 class Base(DeclarativeBase):
     pass
 
-async def get_db():
-    db = AsyncSessionLocal()
-    try:
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as db:
         yield db
-    finally:
-        db.close()
