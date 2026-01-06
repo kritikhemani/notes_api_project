@@ -2,6 +2,7 @@ from pytest import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from typing import AsyncGenerator
 
 DATABASE_URL = "postgresql+asyncpg://postgres:password@localhost/project_db"
 
