@@ -5,7 +5,9 @@ from app.notes import router as notes_router
 
 app = FastAPI(title="Notes API")
 
-
+@app.on_event("startup")
+async def on_startup():
+    pass
 
 
 @app.get("/")
