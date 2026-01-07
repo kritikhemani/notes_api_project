@@ -7,7 +7,8 @@ app = FastAPI(title="Notes API")
 
 @app.on_event("startup")
 async def on_startup():
-    pass
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 @app.get("/")
