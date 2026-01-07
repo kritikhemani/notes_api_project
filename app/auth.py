@@ -29,7 +29,7 @@ async def login(form: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = 
     return Token(access_token=create_access_token(user.id), refresh_token=create_refresh_token(user.id), token_type="bearer")
 
 @router.post("/refresh", response_model=Token)
-def refresh_token(refresh_token: str, db: AsyncSession = Depends(get_db)):
+async def refresh_token(refresh_token: str, db: AsyncSession = Depends(get_db)):
     payload = decode_token(refresh_token)
     if payload.get("type") != "refresh":
         raise HTTPException(status_code=401, detail="Invalid refresh token")
