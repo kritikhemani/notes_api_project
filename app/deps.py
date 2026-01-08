@@ -1,5 +1,5 @@
 from fastapi import Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db, AsyncSessionLocal
 from app.models import User
 from fastapi.security import OAuth2PasswordBearer
