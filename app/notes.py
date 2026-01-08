@@ -8,7 +8,7 @@ from app.deps import get_current_user
 
 router = APIRouter(prefix="/notes", tags=["notes"])
 
-@router.post("/create/")
+@router.post("/create/", response_model=NoteRead)
 async def create_note(payload: NoteCreate, db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
     
     new_note = Note(title=payload.title, content=payload.content, owner_id=current_user.id)
