@@ -40,7 +40,9 @@ async def update_notes(note_id: int, payload: NoteUpdate, db: AsyncSession = Dep
 
 @router.delete("/delete/{note_id}/")
 async def delete_note(note_id: int, db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
-    note = db.query(Note).filter(Note.id == note_id, Note.owner_id == current_user.id).first()
+    stmt = select(Note).where(Note.id == note_id, Note.owner_id == current_user.id)
+    result = await db.execute(stmt)
+    note = result.scalars().first()
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
     db.delete(note)
