@@ -42,7 +42,7 @@ async def update_notes(note_id: int, payload: NoteUpdate, db: AsyncSession = Dep
 async def delete_note(note_id: int, db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
     stmt = select(Note).where(Note.id == note_id, Note.owner_id == current_user.id)
     result = await db.execute(stmt)
-    note = result.scalars().first()
+    note = result.scalar_one_or_none()
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
     db.delete(note)
