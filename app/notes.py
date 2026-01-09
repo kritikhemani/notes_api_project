@@ -46,5 +46,5 @@ async def delete_note(note_id: int, db: AsyncSession = Depends(get_db), current_
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
     db.delete(note)
-    db.commit()
+    await db.commit()
     return {"detail": "Note deleted successfully"}
