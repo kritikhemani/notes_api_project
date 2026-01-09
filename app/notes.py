@@ -34,8 +34,8 @@ async def update_notes(note_id: int, payload: NoteUpdate, db: AsyncSession = Dep
         note.title = payload.title
         if note.content is not None:
             note.content = payload.content
-    db.commit()
-    db.refresh(note)
+    await db.commit()
+    await db.refresh(note)
     return note
 
 @router.delete("/delete/{note_id}/")
