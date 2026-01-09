@@ -27,7 +27,7 @@ async def read_notes(skip: int = Query(0, ge=0), limit: int = Query(10, le=100),
 async def update_notes(note_id: int, payload: NoteUpdate, db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
     stmt = select(Note).where(Note.id == note_id, Note.owner_id == current_user.id)
     result = await db.execute(stmt)
-    note = result.scalars().first()
+    note = result.scalar_one_or_none()
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
     if payload.title is not None:
