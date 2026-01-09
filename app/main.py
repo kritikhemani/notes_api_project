@@ -12,7 +12,7 @@ async def on_startup():
 
 
 @app.get("/")
-def home():
+async def home():
     return {"message": "Welcome to the Notes API!"}
 
 app.include_router(auth_router)
