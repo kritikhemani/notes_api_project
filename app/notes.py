@@ -18,7 +18,7 @@ async def create_note(payload: NoteCreate, db: AsyncSession = Depends(get_db), c
     return new_note
 
 @router.get("/read/")
-async def read_notes(skip: int = Query(0, ge=0), limit: int = Query(10, le=100), db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+async def read_notes(skip: int = Query(0, ge=0), limit: int = Query(10, le=100), db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
     notes = db.query(Note).filter(Note.owner_id == current_user.id).offset(skip).limit(limit).all()
     return notes
 
