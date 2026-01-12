@@ -5,3 +5,5 @@ from httpx import AsyncClient
 from app.main import app
 from alembic.config import Config
 from alembic import command
+
+alembic_cfg = Config("alembic.ini")
