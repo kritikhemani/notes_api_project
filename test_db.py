@@ -15,3 +15,6 @@ def create_test_db():
     
 def run_migrations():
     pass
+
+def reset_test_db():
+    pass
