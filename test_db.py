@@ -12,3 +12,6 @@ def create_test_db():
     asyncio.run(engine.run_sync(Base.metadata.create_all))
     alembic_cfg = Config("alembic.ini")
     alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
+    
+def run_migrations():
+    pass
