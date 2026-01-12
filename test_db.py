@@ -2,6 +2,7 @@ import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import command
 from alembic.config import Config
+from app.database import Base
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
