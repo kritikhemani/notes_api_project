@@ -17,4 +17,5 @@ def run_migrations():
     command.upgrade(alembic_cfg, "head")
 
 def reset_test_db():
-    pass
+    command.downgrade(alembic_cfg, "base")
+    run_migrations()
