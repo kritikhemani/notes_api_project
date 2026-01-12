@@ -4,3 +4,4 @@ import pytest_asyncio
 from httpx import AsyncClient
 from app.main import app
 from alembic.config import Config
+from alembic import command
