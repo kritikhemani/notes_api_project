@@ -14,6 +14,10 @@ async def test_register_and_create_note(client):
     # Register user
     response = await client.post("/auth/register", json={"username": "testuser", "password": "testpass"})
     assert response.status_code == 201
+    
+    #Create note
+    headers = {"Authorization": f"Bearer {token}"}
+    response = await client.post("/notes/", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
 
 @pytest.mark.asyncio
 async def test_read_note(client):
