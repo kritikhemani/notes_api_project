@@ -14,3 +14,7 @@ def setup_test_db():
     command.upgrade(alembic_cfg, "head")
     yield
     command.downgrade(alembic_cfg, "base")
+    
+@pytest_asyncio.fixture
+async def client():
+    pass
