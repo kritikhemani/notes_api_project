@@ -8,3 +8,7 @@ from app.main import app
 async def client():
     async with AsyncClient(app=app, base_url="http://testserver") as async_client:
         yield async_client
+        
+@pytest.mark.asyncio
+async def test_register_and_create_note(client):
+    pass
