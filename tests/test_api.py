@@ -12,3 +12,7 @@ async def client():
 @pytest.mark.asyncio
 async def test_register_and_create_note(client):
     pass
+
+@pytest.mark.asyncio
+async def test_read_note(client):
+    pass
