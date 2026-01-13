@@ -14,6 +14,7 @@ async def test_register_and_create_note(client):
     # Register user
     response = await client.post("/auth/register", json={"username": "testuser", "password": "testpass"})
     assert response.status_code == 201
+    token = response.json()["access_token"]
     
     #Create note
     headers = {"Authorization": f"Bearer {token}"}
