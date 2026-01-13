@@ -16,3 +16,6 @@ alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
 def reset_test_db():
     command.downgrade(alembic_cfg, "base")
     command.upgrade(alembic_cfg, "head")
+    
+if __name__ == "__main__":
+    reset_test_db()
