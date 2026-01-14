@@ -25,5 +25,5 @@ async def test_register_and_create_note(client):
 
 @pytest.mark.asyncio
 async def test_read_note(client):
-    pass
+    response = await client.post("/auth/register", json={"username": "testuser2", "password": "testpass2"})
 
