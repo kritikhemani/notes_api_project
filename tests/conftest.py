@@ -7,3 +7,7 @@ from alembic.config import Config
 
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
+
+@pytest.fixture(scope="session", autouse=True)
+def db_setup():
+    pass
