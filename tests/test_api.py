@@ -28,3 +28,8 @@ async def test_read_note(client):
     response = await client.post("/auth/register", json={"username": "testuser2", "password": "testpass2"})
     token = response.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
+    await client.post("/notes/create/", json={"title": "Another Note", "content": "Content here."}, headers=headers)
+    response = await client.get("/notes/read/", headers=headers)
+    assert response.status_code == 200
+    notes = response.json()
+    assert len(notes) > 0
