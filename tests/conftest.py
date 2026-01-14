@@ -11,3 +11,8 @@ TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 @pytest.fixture(scope="session", autouse=True)
 def db_setup():
     pass
+
+@pytest_asyncio.fixture
+async def client():
+    async with AsyncClient(app=app, base_url="http://testserver") as async_client:
+        yield async_client
