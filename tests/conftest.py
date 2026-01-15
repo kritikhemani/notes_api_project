@@ -4,10 +4,6 @@ import pytest_asyncio
 from app.main import app
 from alembic import command
 from alembic.config import Config
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
