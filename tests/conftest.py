@@ -10,7 +10,7 @@ TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
 @pytest.fixture(scope="session", autouse=True)
 def db_setup():
-    pass
+    alembic_cfg = Config("alembic.ini")
 
 @pytest_asyncio.fixture
 async def client():
