@@ -1,10 +1,6 @@
 import pytest
 import pytest_asyncio
 from httpx import AsyncClient
-from app.main import app
-
-  
-
         
 @pytest.mark.asyncio
 async def test_register_and_create_note(client):
