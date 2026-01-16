@@ -17,8 +17,6 @@ class UserRead(BaseModel):
     email: EmailStr
     is_active: bool
     
-    class Config:
-        from_attributes = True
 
 class NoteCreate(BaseModel):
     title: str
