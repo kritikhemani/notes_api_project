@@ -32,5 +32,3 @@ class NoteRead(BaseModel):
     content: str
     owner_id: int
     
-    class config:
-        from_attributes = True
