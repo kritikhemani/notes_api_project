@@ -6,6 +6,9 @@ from httpx import AsyncClient
 async def test_register_and_create_note(client):
     # Register user
     response = await client.post("/auth/register", json={"username": "testuser", "password": "testpass"})
+    if response.status_code == 422:
+        print(response.json())
+    
     assert response.status_code == 201
     token = response.json()["access_token"]
     
