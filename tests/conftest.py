@@ -9,6 +9,8 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from app.main import app
+
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
 @pytest.fixture(scope="session", autouse=True)
