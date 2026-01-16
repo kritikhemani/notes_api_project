@@ -23,5 +23,6 @@ def db_setup():
 
 @pytest_asyncio.fixture
 async def client():
-    async with AsyncClient(app=app, base_url="http://testserver") as async_client:
+    #Use ASGITransport to create an AsyncClient for FastAPI app
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://testserver") as async_client:
         yield async_client
