@@ -32,4 +32,5 @@ class NoteRead(BaseModel):
     title: str
     content: str
     owner_id: int
+    model_config = ConfigDict(from_attributes=True)
     
