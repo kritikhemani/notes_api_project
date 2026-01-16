@@ -1,5 +1,5 @@
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 import pytest_asyncio
 from app.main import app
 from alembic import command
