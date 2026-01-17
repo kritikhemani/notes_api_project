@@ -8,12 +8,8 @@ from app.notes import router as notes_router
 async def lifespan(app: FastAPI):
     pass
 
-app = FastAPI(title="Notes API")
 
-@app.on_event("startup")
-async def on_startup():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+app = FastAPI(title="Notes API")
 
 
 @app.get("/")
