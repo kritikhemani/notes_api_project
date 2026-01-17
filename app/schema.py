@@ -10,7 +10,7 @@ class Token(BaseModel):
 class UserCreate(BaseModel):
     name: str
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=6, max_length=28)
     
 class UserRead(BaseModel):
     id: int
