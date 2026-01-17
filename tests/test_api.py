@@ -5,7 +5,7 @@ from httpx import AsyncClient
 @pytest.mark.asyncio
 async def test_register_and_create_note(client):
     # Register user
-    response = await client.post("/auth/register", json={"username": "testuser", "password": "testpass"})
+    response = await client.post("/auth/register", json={"username": "testuser", "name": "Test User", "email": "testuser@example.com", "password": "testpass"})
     if response.status_code == 422:
         print(response.json())
     assert response.status_code == 201
