@@ -13,7 +13,7 @@ async def lifespan(app: FastAPI):
         await conn.run_sync(Base.metadata.drop_all)
 
 
-app = FastAPI(title="Notes API")
+app = FastAPI(title="Notes API", lifespan=lifespan)
 
 
 @app.get("/")
