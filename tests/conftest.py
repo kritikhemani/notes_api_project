@@ -1,4 +1,5 @@
 import pytest
+import asyncio
 from httpx import AsyncClient, ASGITransport
 import pytest_asyncio
 from app.main import app
