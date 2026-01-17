@@ -6,7 +6,8 @@ from app.notes import router as notes_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    pass
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 app = FastAPI(title="Notes API")
