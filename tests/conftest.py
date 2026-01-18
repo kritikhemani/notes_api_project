@@ -28,12 +28,10 @@ def test_engine():
 
 @pytest.fixture(scope="session", autouse=True)
 async def db_setup(test_engine):
-    engine = create_async_engine(TEST_DB_URL, poolclass=NullPool)
-    alembic_cfg = Config(alembic_path)
+    alembic_cfg = Config("alembic.ini")
     alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
     command.downgrade(alembic_cfg, "base")
     command.upgrade(alembic_cfg, "head")
-    
     async with engine.begin() as conn:
         await conn.execute ("TRUNCATE TABLE users RESTART IDENTITY CASCADE;")
     yield
