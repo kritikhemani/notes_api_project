@@ -13,14 +13,18 @@ import os
 from app.main import app
 from app.database import get_db
 
+TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
+
 @pytest.fixture(scope="session")
 def event_loop():
     policy = asyncio.get_event_loop_policy()
     loop = policy.new_event_loop()
     yield loop
     loop.close()
-
-TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
+    
+@pytest.fixture(scope="session")
+def test_engine():
+    pass
 
 @pytest.fixture(scope="session", autouse=True)
 async def db_setup():
