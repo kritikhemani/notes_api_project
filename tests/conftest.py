@@ -29,7 +29,7 @@ def db_setup():
     command.downgrade(alembic_cfg, "base")
     command.upgrade(alembic_cfg, "head")
 
-@pytest_asyncio.fixture
+@pytest_asyncio.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://testserver") as async_client:
