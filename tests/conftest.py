@@ -24,7 +24,7 @@ def event_loop():
     
 @pytest.fixture(scope="session")
 def test_engine():
-    pass
+    return create_async_engine(TEST_DB_URL, poolclass=NullPool)
 
 @pytest.fixture(scope="session", autouse=True)
 async def db_setup(test_engine):
