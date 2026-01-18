@@ -30,8 +30,12 @@ def test_engine():
 async def db_setup(test_engine):
     alembic_cfg = Config("alembic.ini")
     alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
-
-
+    async with test_engine.begin() as conn:
+        await conn.run_sync(lambda sync_conn: command.upgrade(alembic_cfg, "head"))
+        await conn.execute(text("TRUNCATE TABLE users RESTART IDENTITY CASCADE;"))
+    yield
+    await test_engine.dispose()
+    
 @pytest_asyncio.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
