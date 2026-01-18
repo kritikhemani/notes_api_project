@@ -25,6 +25,7 @@ TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
 @pytest.fixture(scope="session", autouse=True)
 def db_setup():
+    engine = create_async_engine(TEST_DB_URL, poolclass=NullPool)
     alembic_path = os.path.join(os.path.dirname(__file__), "../alembic.ini")
     alembic_cfg = Config(alembic_path)
     alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
