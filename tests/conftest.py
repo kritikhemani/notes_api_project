@@ -2,9 +2,9 @@ import pytest
 import asyncio
 from httpx import AsyncClient, ASGITransport
 import pytest_asyncio
-from app.main import app
 from alembic import command
 from alembic.config import Config
+
 import sys
 import os
 
