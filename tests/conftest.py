@@ -11,6 +11,7 @@ from alembic.config import Config
 import os
 
 from app.main import app
+from app.database import get_db
 
 @pytest.fixture(scope="session")
 def event_loop():
