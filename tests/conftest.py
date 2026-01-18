@@ -6,11 +6,7 @@ from sqlalchemy.pool import NullPool
 import pytest_asyncio
 from alembic import command
 from alembic.config import Config
-
-import sys
 import os
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.main import app
 
