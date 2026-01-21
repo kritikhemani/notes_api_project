@@ -22,3 +22,6 @@ async def home():
 app.include_router(auth_router)
 app.include_router(notes_router)
 
+if __name__ == "__main__":
+    pass
+
