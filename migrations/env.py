@@ -78,6 +78,10 @@ async def run_async_migrations() -> None:
         await connection.run_sync(do_run_migrations)
 
     await connectable.dispose()
+    
+
+def do_run_migrations_sync():
+    pass
 
 
 def run_migrations_online() -> None:
