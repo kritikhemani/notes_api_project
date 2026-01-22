@@ -88,6 +88,9 @@ def run_migrations_online() -> None:
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
+    
+    async def do_run_migrations():
+        pass
 
 
 if context.is_offline_mode():
