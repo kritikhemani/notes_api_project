@@ -81,7 +81,9 @@ async def run_async_migrations() -> None:
     
 
 def do_run_migrations_sync(connection):
-    pass
+    context.configure(connection=connection, target_metadata=target_metadata)
+    with context.begin_transaction():
+        context.run_migrations()
 
 
 def run_migrations_online() -> None:
