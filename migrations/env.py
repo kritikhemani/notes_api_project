@@ -100,6 +100,10 @@ def run_migrations_online() -> None:
             await connection.run_sync(do_run_migrations_sync)
             
     loop = asyncio.get_event_loop()
+    if loop.is_running():
+        loop.create_task(do_run_migrations())
+    else:
+        loop.run(do_run_migrations())
 
 
 if context.is_offline_mode():
