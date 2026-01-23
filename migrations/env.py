@@ -80,7 +80,7 @@ async def run_async_migrations() -> None:
     await connectable.dispose()
     
 
-def do_run_migrations_sync():
+def do_run_migrations_sync(connection):
     pass
 
 
