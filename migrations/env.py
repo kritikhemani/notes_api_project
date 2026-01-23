@@ -98,6 +98,8 @@ def run_migrations_online() -> None:
     async def do_run_migrations():
         async with connectable.connect() as connection:
             await connection.run_sync(do_run_migrations_sync)
+            
+    loop = asyncio.get_event_loop()
 
 
 if context.is_offline_mode():
