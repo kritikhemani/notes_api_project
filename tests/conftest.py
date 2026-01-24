@@ -35,7 +35,10 @@ async def db_setup(test_engine):
 async def db_session(test_engine):
     async_session = async_sessionmaker(bind=test_engine, class_=AsyncSession, expire_on_commit=False)
     
-    async with AsyncSessionLocal() as session:
+    async with test_engine.begin() as conn:
+        trans = await conn.begin_nested()
+
+    async with async_session() as session:
         yield session
         await session.rollback()
         
