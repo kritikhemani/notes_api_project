@@ -18,6 +18,8 @@ AsyncSessionLocal = async_sessionmaker(bind=create_async_engine(TEST_DB_URL, poo
 @pytest.fixture(scope="session")
 def test_engine():
     engine = create_async_engine(TEST_DB_URL, poolclass=NullPool)
+    yield engine
+    asyncio.run(engine.dispose())
 
 @pytest.fixture(scope="session", autouse=True)
 async def db_setup(test_engine):
