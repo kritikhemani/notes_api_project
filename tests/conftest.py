@@ -8,8 +8,6 @@ from sqlalchemy.pool import NullPool
 import pytest_asyncio
 from alembic import command
 from alembic.config import Config
-import os
-
 from app.main import app
 from app.database import get_db
 
