@@ -32,7 +32,7 @@ async def db_setup(test_engine):
     await test_engine.dispose()
     
 @pytest.fixture
-async def db_session():
+async def db_session(test_engine):
     async with AsyncSessionLocal() as session:
         yield session
         await session.rollback()
