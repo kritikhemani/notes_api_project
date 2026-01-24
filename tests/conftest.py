@@ -30,14 +30,15 @@ async def db_setup(test_engine):
     yield
     await test_engine.dispose()
     
+@pytest.fixture
+async def db_session():
+    async with AsyncSessionLocal() as session:
+        yield session
+        await session.rollback()
+        
 @pytest_asyncio.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://testserver") as async_client:
         yield async_client
         
-@pytest.fixture
-async def db_session():
-    async with AsyncSessionLocal() as session:
-        yield session
-        await session.rollback()
