@@ -33,6 +33,8 @@ async def db_setup(test_engine):
     
 @pytest.fixture
 async def db_session(test_engine):
+    async_session = async_sessionmaker(bind=test_engine, class_=AsyncSession, expire_on_commit=False)
+    
     async with AsyncSessionLocal() as session:
         yield session
         await session.rollback()
