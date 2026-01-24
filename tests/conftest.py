@@ -40,6 +40,10 @@ async def db_session(test_engine):
         yield session
         await session.rollback()
         
+@pytest.fixture(autouse=True)
+def override_get_db():
+    pass
+        
 @pytest_asyncio.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
