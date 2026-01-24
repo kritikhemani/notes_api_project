@@ -18,15 +18,7 @@ def test_engine():
     yield engine
     asyncio.run(engine.dispose())
 
-@pytest.fixture(scope="session", autouse=True)
-async def db_setup(test_engine):
-    alembic_cfg = Config("alembic.ini")
-    alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL)
-    async with test_engine.begin() as conn:
-        await conn.run_sync(lambda sync_conn: command.upgrade(alembic_cfg, "head"))
-        await conn.execute(text("TRUNCATE TABLE users RESTART IDENTITY CASCADE;"))
-    yield
-    await test_engine.dispose()
+
     
 @pytest.fixture
 async def db_session(test_engine):
