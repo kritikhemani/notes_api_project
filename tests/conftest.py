@@ -18,7 +18,9 @@ def test_engine():
     yield engine
     asyncio.run(engine.dispose())
 
-
+@pytest.fixture(scope="session", autouse=True)
+async def run_migrations():
+    pass
     
 @pytest.fixture
 async def db_session(test_engine):
