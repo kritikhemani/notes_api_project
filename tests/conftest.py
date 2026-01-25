@@ -22,7 +22,9 @@ def test_engine():
 async def run_migrations(test_engine):
     alembic_cfg = Config("alembic.ini")
     
-    
+    async with test_engine.begin() as conn:
+        await conn.run_sync(lambda _: command.upgrade(alembic_cfg, "head"))
+    yield
     
 @pytest.fixture
 async def db_session(test_engine):
