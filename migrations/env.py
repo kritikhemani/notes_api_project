@@ -86,7 +86,7 @@ def do_run_migrations_sync(connection):
         context.run_migrations()
 
 
-def run_migrations_online() -> None:
+async def run_migrations_online() -> None:
     """Run migrations in 'online' mode."""
 
     connectable = async_engine_from_config(
@@ -94,16 +94,15 @@ def run_migrations_online() -> None:
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
-    
-    async def do_run_migrations():
-        async with connectable.connect() as connection:
-            await connection.run_sync(do_run_migrations_sync)
+        
+    async with connectable.connect() as connection:
+        await connection.run_sync(do_run_migrations)
             
     loop = asyncio.get_event_loop()
     if loop.is_running():
         loop.create_task(do_run_migrations())
     else:
-        loop.run(do_run_migrations())
+        loop.run(do_run_migrations()              )
 
 
 if context.is_offline_mode():
