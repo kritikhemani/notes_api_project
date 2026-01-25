@@ -40,7 +40,7 @@ async def db_session(test_engine):
         await session.rollback()
         
 @pytest.fixture(autouse=True)
-def override_get_db():
+def override_get_db(db_session):
     pass
         
 @pytest_asyncio.fixture(scope="session")
