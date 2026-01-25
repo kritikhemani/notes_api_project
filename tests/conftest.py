@@ -20,7 +20,7 @@ def test_engine():
 
 @pytest.fixture(scope="session", autouse=True)
 async def run_migrations():
-    pass
+    alembic_cfg = Config("alembic.ini")
     
 @pytest.fixture
 async def db_session(test_engine):
