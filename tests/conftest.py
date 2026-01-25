@@ -45,6 +45,7 @@ def override_get_db(db_session):
         yield db_session
     app.dependency_overrides[get_db] = _override
     yield
+    app.dependency_overrides.clear()
         
 @pytest_asyncio.fixture(scope="session")
 async def client():
