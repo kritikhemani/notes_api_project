@@ -102,7 +102,7 @@ async def run_migrations_online() -> None:
     if loop.is_running():
         loop.create_task(do_run_migrations())
     else:
-        loop.run(do_run_migrations()              )
+        loop.run(do_run_migrations())
 
 
 if context.is_offline_mode():
