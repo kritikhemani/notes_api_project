@@ -13,10 +13,10 @@ from app.database import get_db
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
    
 @pytest.fixture(scope="session")
-def test_engine():
+async def test_engine():
     engine = create_async_engine(TEST_DB_URL, poolclass=NullPool)
     yield engine
-    asyncio.run(engine.dispose())
+    await engine.dispose()
 
 @pytest.fixture(scope="session", autouse=True)
 async def run_migrations(test_engine):
