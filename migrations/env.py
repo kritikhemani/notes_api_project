@@ -104,4 +104,4 @@ if context.is_offline_mode():
 else:
     import asyncio
     
-asyncio.run(run_migrations_online())
+
