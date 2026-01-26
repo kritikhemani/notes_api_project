@@ -28,7 +28,7 @@ async def test_read_note(client):
     response = await client.post("/auth/register", json={"name": "Test User 2", "email": "testuser2@example.com", "password": "secure123"})
     token = response.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
-    await client.post("/notes/create/", json={"title": "Another Note", "content": "Content here."}, headers=headers)
+    await client.post("/notes/", json={"title": "Another Note", "content": "Content here."}, headers=headers)
     response = await client.get("/notes/read/", headers=headers)
     assert response.status_code == 200
     notes = response.json()
