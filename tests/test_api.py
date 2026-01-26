@@ -9,7 +9,7 @@ async def register_and_get_token(client):
 
 @pytest.mark.asyncio
 async def test_register_and_create_note(client):
-    
+    token = await register_and_get_token(client)
     headers = {"Authorization": f"Bearer {token}"}
     response = await client.post("/notes/", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
     assert response.status_code == 201
