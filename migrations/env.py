@@ -102,6 +102,4 @@ async def run_migrations_online() -> None:
 if context.is_offline_mode():
     run_migrations_offline()
 else:
-    import asyncio
-    
-asyncio.get_event_loop().run_until_complete(run_migrations_online())
+    run_migrations_online()
