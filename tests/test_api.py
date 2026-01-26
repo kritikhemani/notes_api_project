@@ -2,7 +2,7 @@ import pytest
 import pytest_asyncio
 from httpx import AsyncClient
 
-async def register_and_get_token():
+async def register_and_get_token(client):
     pass
         
 @pytest.mark.asyncio
