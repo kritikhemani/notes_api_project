@@ -3,6 +3,7 @@ import asyncio
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy import text
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
 import pytest_asyncio
 from alembic import command
