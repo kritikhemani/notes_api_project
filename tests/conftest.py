@@ -21,6 +21,7 @@ async def test_engine():
 @pytest.fixture(scope="session", autouse=True)
 def run_migrations():
     alembic_cfg = Config("alembic.ini")
+    alembic_cfg.set_main_option("sqlalchemy.url", TEST_DB_URL.replace("+asyncpg", ""))
 
     
 @pytest.fixture
