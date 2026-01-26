@@ -3,8 +3,9 @@ import pytest_asyncio
 from httpx import AsyncClient
 
 async def register_and_get_token(client):
-    pass
-        
+    response = await client.post("/auth/register", json={"name": "Test User", "email": "testuser@example.com", "password": "secure123"})
+    
+
 @pytest.mark.asyncio
 async def test_register_and_create_note(client):
     # Register user
