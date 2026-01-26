@@ -94,9 +94,9 @@ async def run_migrations_online() -> None:
         poolclass=pool.NullPool,
     )
         
-    async with connectable.connect() as connection:
-        await connection.run_sync(do_run_migrations)
-    await connectable.dispose()
+    with connectable.connect() as connection:
+        connection.run_sync(do_run_migrations)
+    connectable.dispose()
 
 
 if context.is_offline_mode():
