@@ -5,11 +5,7 @@ from app.auth import router as auth_router
 from app.notes import router as notes_router
 import uvicorn
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield
+
 
 
 app = FastAPI(title="Notes API", lifespan=lifespan)
