@@ -3,6 +3,7 @@ import pytest_asyncio
 from httpx import AsyncClient
 
 async def register_and_get_token(client):
+    email = unique_email()
     response = await client.post("/auth/register", json={"name": "Test User", "email": "testuser@example.com", "password": "secure123"})
     assert response.status_code == 201
     return response.json()["access_token"]
