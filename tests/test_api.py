@@ -2,6 +2,9 @@ import pytest
 from httpx import AsyncClient
 import uuid
 
+def unique_email():
+    pass
+
 async def register_and_get_token(client):
     email = unique_email()
     response = await client.post("/auth/register", json={"name": "Test User", "email": email, "password": "secure123"})
