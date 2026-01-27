@@ -1,6 +1,6 @@
 import pytest
 from httpx import AsyncClient
-from tests.conftest import unique_email
+
 
 async def register_and_get_token(client):
     email = unique_email()
