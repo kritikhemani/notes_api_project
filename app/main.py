@@ -1,14 +1,10 @@
 from fastapi import FastAPI
-from contextlib import asynccontextmanager
 from app.database import engine, Base
 from app.auth import router as auth_router
 from app.notes import router as notes_router
 import uvicorn
 
-
-
-
-app = FastAPI(title="Notes API", lifespan=lifespan)
+app = FastAPI(title="Notes API")
 
 
 @app.get("/")
