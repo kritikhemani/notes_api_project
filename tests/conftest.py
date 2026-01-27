@@ -10,7 +10,6 @@ from alembic import command
 from alembic.config import Config
 from app.main import app
 from app.database import get_db
-import uuid
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
  
