@@ -5,7 +5,6 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
-import pytest_asyncio
 from alembic import command
 from alembic.config import Config
 from app.main import app
@@ -13,8 +12,6 @@ from app.database import get_db
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
  
-def unique_email():
-    return f"user_{uuid.uuid4().hex}@example.com"
    
 @pytest.fixture(scope="session")
 async def test_engine():
