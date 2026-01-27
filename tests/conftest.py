@@ -15,7 +15,7 @@ import uuid
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
  
 def unique_email():
-    pass
+    return f"user_{uuid.uuid4().hex}@example.com"
    
 @pytest.fixture(scope="session")
 async def test_engine():
