@@ -3,7 +3,7 @@ from httpx import AsyncClient
 import uuid
 
 def unique_email():
-    pass
+    return f"user_{uuid.uuid4().hex}@example.com"
 
 async def register_and_get_token(client):
     email = unique_email()
