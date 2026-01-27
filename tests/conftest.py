@@ -13,6 +13,9 @@ from app.database import get_db
 import uuid
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
+ 
+def unique_email():
+    pass
    
 @pytest.fixture(scope="session")
 async def test_engine():
