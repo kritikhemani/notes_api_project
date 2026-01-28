@@ -18,6 +18,7 @@ async def db_session():
     async with engine.connect() as conn:
         trans = await conn.begin()
         session = AsyncSessionLocal(bind=conn, expire_on_commit=False)
+        await session.begin_nested()
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
