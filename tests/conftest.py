@@ -26,7 +26,11 @@ async def db_session():
         if trans_.nested and not trans_._parent.nested:
             sess.begin_nested()
             
-    
+    try:
+        yield session
+    finally:
+        await session.close()
+        await trans.rollback()
     
         
 @pytest.fixture(autouse=True)
