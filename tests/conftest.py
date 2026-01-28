@@ -21,9 +21,13 @@ async def db_session():
         session = AsyncSessionLocal(bind=conn, expire_on_commit=False)
         await session.begin_nested()
         
-@event.listens_for(session.sync_session, "after_transaction_end")
-def restart_savepoint(session, trans_):
-    pass
+    @event.listens_for(session.sync_session, "after_transaction_end")
+    def restart_savepoint(sess, trans_):
+        if trans_.nested and not trans_._parent.nested:
+            sess.begin_nested()
+            
+    
+    
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
