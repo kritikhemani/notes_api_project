@@ -13,16 +13,6 @@ engine = create_async_engine(TEST_DB_URL, echo=False)
 
 AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False, autoflush=False, autocommit=False)
 
-    
-@pytest.fixture
-async def db_session():
-    async with AsyncSessionLocal() as session:
-        try:
-            yield session
-        finally:
-            await session.rollback()
-            await session.close()
-        
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
