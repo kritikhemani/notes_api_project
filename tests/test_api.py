@@ -12,7 +12,7 @@ async def register_and_get_token(client) -> str:
     return response.json()["access_token"]
 
 @pytest.mark.asyncio
-async def test_register_and_create_note(client):
+async def test_register_and_create_note(client: AsyncClient):
     token = await register_and_get_token(client)
     headers = {"Authorization": f"Bearer {token}"}
     response = await client.post("/notes/", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
