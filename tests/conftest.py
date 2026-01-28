@@ -1,5 +1,6 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
+from requests import session
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import event
@@ -19,6 +20,10 @@ async def db_session():
         trans = await conn.begin()
         session = AsyncSessionLocal(bind=conn, expire_on_commit=False)
         await session.begin_nested()
+        
+@event.listens_for(session.sync_session, "after_transaction_end")
+def restart_savepoint(session, trans_):
+    pass
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
