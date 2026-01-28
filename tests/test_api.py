@@ -21,7 +21,7 @@ async def test_register_and_create_note(client: AsyncClient):
     assert data["title"] == "Test Note"
 
 @pytest.mark.asyncio
-async def test_read_note(client):
+async def test_read_note(client: AsyncClient):
     token = await register_and_get_token(client)
     headers = {"Authorization": f"Bearer {token}"}
     await client.post("/notes/", json={"title": "Another Note", "content": "Content here."}, headers=headers)
