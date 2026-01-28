@@ -5,7 +5,7 @@ import uuid
 def unique_email() -> str:
     return f"user_{uuid.uuid4().hex}@example.com"
 
-async def register_and_get_token(client):
+async def register_and_get_token(client) -> str:
     email = unique_email()
     response = await client.post("/auth/register", json={"name": "Test User", "email": email, "password": "secure123"})
     assert response.status_code == 201
