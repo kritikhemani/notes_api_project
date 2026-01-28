@@ -15,7 +15,8 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
     
 @pytest.fixture
 async def db_session():
-    pass
+    async with engine.connect() as conn:
+        trans = await conn.begin()
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
