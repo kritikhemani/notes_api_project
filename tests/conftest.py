@@ -17,7 +17,8 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
 @pytest.fixture(autouse=True)
 async def override_get_db():
     async def _override():
-        
+        async with AsyncSessionLocal() as session:
+            yield session
     app.dependency_overrides[get_db] = _override
     yield
     app.dependency_overrides.clear()
