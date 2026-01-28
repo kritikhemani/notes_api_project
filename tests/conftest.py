@@ -16,22 +16,13 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
     
 @pytest.fixture
 async def db_session():
-    async with engine.connect() as conn:
-        trans = await conn.begin()
-        session = AsyncSessionLocal(bind=conn, expire_on_commit=False)
-        await session.begin_nested()
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.rollback()
+            await session.close()
         
-    @event.listens_for(session.sync_session, "after_transaction_end")
-    def restart_savepoint(sess, trans_):
-        if trans_.nested and not trans_._parent.nested:
-            sess.begin_nested()
-            
-    try:
-        yield session
-    finally:
-        await session.close()
-        await trans.rollback()
-    
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
