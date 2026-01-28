@@ -2,6 +2,7 @@ import pytest
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import event
 from app.main import app
 from app.database import get_db
 
@@ -14,9 +15,7 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
     
 @pytest.fixture
 async def db_session():
-    async with AsyncSessionLocal() as session:
-        yield session
-        await session.rollback()
+    pass
         
 @pytest.fixture(autouse=True)
 async def override_get_db(db_session: AsyncSession):
