@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 import uuid
 
-def unique_email():
+def unique_email() -> str:
     return f"user_{uuid.uuid4().hex}@example.com"
 
 async def register_and_get_token(client):
