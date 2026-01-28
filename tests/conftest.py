@@ -23,7 +23,7 @@ async def db_session():
         await session.rollback()
         
 @pytest.fixture(autouse=True)
-async def override_get_db(db_session):
+async def override_get_db(db_session: AsyncSession):
     async def _override():
         yield db_session
     app.dependency_overrides[get_db] = _override
