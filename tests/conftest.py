@@ -12,12 +12,9 @@ from app.database import get_db
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
 engine = create_async_engine(TEST_DB_URL, poolclass=NullPool, echo=False)
-   
-@pytest.fixture(scope="session")
-async def test_engine():
-    engine = create_async_engine(TEST_DB_URL, poolclass=NullPool)
-    yield engine
-    await engine.dispose()
+
+
+  
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_db():
