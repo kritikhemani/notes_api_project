@@ -13,11 +13,6 @@ engine = create_async_engine(TEST_DB_URL, future=True, echo=False)
 
 AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False, autoflush=False, autocommit=False)
 
-@pytest.fixture(scope="session")
-def event_loop():
-    loop = asyncio.get_event_loop()
-    yield loop
-    loop.close()
         
 async def override_get_db():
     async def _override():
