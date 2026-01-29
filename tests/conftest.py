@@ -10,8 +10,6 @@ from app.database import get_db
 
 TEST_DB_URL = "postgresql+asyncpg://postgres:password@localhost/project_test_db"
 
-AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False, autoflush=False, autocommit=False)
-
 @pytest.fixture(scope="session")
 def event_loop():
     loop = asyncio.get_event_loop()
@@ -24,6 +22,8 @@ async def engine():
     yield engine
     await engine.dispose()
         
+AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False, autoflush=False, autocommit=False)
+
 @pytest.fixture(autouse=True)
 async def override_get_db():
     async def _override():
