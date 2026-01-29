@@ -19,6 +19,10 @@ def event_loop():
     loop = asyncio.get_event_loop()
     yield loop
     loop.close()
+    
+@pytest.fixture(scope="session")
+async def engine():
+    pass
         
 @pytest.fixture(autouse=True)
 async def override_get_db():
