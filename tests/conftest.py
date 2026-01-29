@@ -22,7 +22,9 @@ def event_loop():
     
 @pytest.fixture(scope="session")
 async def engine():
-    pass
+    engine = create_async_engine(TEST_DB_URL, echo=False)
+    yield engine
+    await engine.dispose()
         
 @pytest.fixture(autouse=True)
 async def override_get_db():
