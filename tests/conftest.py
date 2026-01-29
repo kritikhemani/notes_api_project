@@ -16,7 +16,9 @@ AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_com
 
 @pytest.fixture(scope="session")
 def event_loop():
-    pass
+    loop = asyncio.get_event_loop()
+    yield loop
+    loop.close()
         
 @pytest.fixture(autouse=True)
 async def override_get_db():
