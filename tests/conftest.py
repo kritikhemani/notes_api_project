@@ -19,7 +19,6 @@ def event_loop():
     yield loop
     loop.close()
         
-@pytest.fixture(autouse=True)
 async def override_get_db():
     async def _override():
         async with AsyncSessionLocal() as session:
