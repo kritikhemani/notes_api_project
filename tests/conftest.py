@@ -36,6 +36,6 @@ async def override_get_db():
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
     transport = ASGITransport(app=app)
-    async with AsyncClient(app=app, base_url="http://test") as async_client:
+    async with AsyncClient(transport=transport, base_url="http://test") as async_client:
         yield async_client
         
