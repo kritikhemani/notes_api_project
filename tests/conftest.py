@@ -14,6 +14,9 @@ engine = create_async_engine(TEST_DB_URL, echo=False)
 
 AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False, autoflush=False, autocommit=False)
 
+@pytest.fixture(scope="session")
+def event_loop():
+    pass
         
 @pytest.fixture(autouse=True)
 async def override_get_db():
