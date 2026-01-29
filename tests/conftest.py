@@ -35,6 +35,7 @@ async def override_get_db():
 @pytest.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
+    transport = ASGITransport(app=app)
     async with AsyncClient(app=app, base_url="http://test") as async_client:
         yield async_client
         
