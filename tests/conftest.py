@@ -18,12 +18,6 @@ def event_loop():
     loop = asyncio.get_event_loop()
     yield loop
     loop.close()
-    
-@pytest.fixture(scope="session")
-async def engine():
-    engine = create_async_engine(TEST_DB_URL, echo=False)
-    yield engine
-    await engine.dispose()
         
 @pytest.fixture(autouse=True)
 async def override_get_db():
