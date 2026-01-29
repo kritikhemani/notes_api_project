@@ -1,6 +1,6 @@
 import pytest
 import asyncio
-from httpx import AsyncClient, ASGITransport
+from httpx import AsyncClient
 from requests import session
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker
@@ -27,6 +27,6 @@ async def override_get_db():
 @pytest.fixture(scope="session")
 async def client():
     #Use ASGITransport to create an AsyncClient for FastAPI app
-    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as async_client:
+    async with AsyncClient(app=app, base_url="http://test") as async_client:
         yield async_client
         
