@@ -1,31 +1,65 @@
 import pytest
 from httpx import AsyncClient
-import uuid
+from uuid import uuid4
 
-def unique_email() -> str:
-    return f"user_{uuid.uuid4().hex[:6]}@example.com"
+def random_email():
+    return f"user_{uuid4().hex[:8]}@example.com"
 
-async def register_and_get_token(client: AsyncClient) -> str:
-    email = unique_email()
-    response = await client.post("/auth/register", json={"name": "Test User", "email": email, "password": "secure123"})
-    assert response.status_code == 200
-    return response.json()["access_token"]
+
+async def register(client: AsyncClient, email: str, password: str):
+    r = await client.post(
+        "/auth/register",
+        json={"name": "Test User", "email": email, "password": password},
+    )
+    assert r.status_code == 200
+
+
+async def login(client: AsyncClient, email: str, password: str) -> str:
+    r = await client.post(
+        "/auth/login",
+        data={"username": email, "password": password},
+    )
+    assert r.status_code == 200
+    return r.json()["access_token"]
+
 
 @pytest.mark.asyncio
 async def test_register_and_create_note(client: AsyncClient):
-    token = await register_and_get_token(client)
+    email = random_email()
+    password = "secure123"
+
+    await register(client, email, password)
+    token = await login(client, email, password)
+
     headers = {"Authorization": f"Bearer {token}"}
-    response = await client.post("/notes/create", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
-    assert response.status_code == 200
-    data = response.json()
-    assert data["title"] == "Test Note"
+
+    r = await client.post(
+        "/notes/create",
+        json={"title": "Test Note", "content": "This is a test"},
+        headers=headers,
+    )
+
+    assert r.status_code == 200
+    assert r.json()["title"] == "Test Note"
+
 
 @pytest.mark.asyncio
 async def test_read_note(client: AsyncClient):
-    token = await register_and_get_token(client)
+    email = random_email()
+    password = "secure123"
+
+    await register(client, email, password)
+    token = await login(client, email, password)
+
     headers = {"Authorization": f"Bearer {token}"}
-    await client.post("/notes/create", json={"title": "Another Note", "content": "Content here."}, headers=headers)
-    response = await client.get("/notes/read", headers=headers)
-    assert response.status_code == 200
-    notes = response.json()
-    assert len(notes) >= 1
+
+    await client.post(
+        "/notes/create",
+        json={"title": "Another Note", "content": "Hello"},
+        headers=headers,
+    )
+
+    r = await client.get("/notes/read", headers=headers)
+
+    assert r.status_code == 200
+    assert len(r.json()) > 0
