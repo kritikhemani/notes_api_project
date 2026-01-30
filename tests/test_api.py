@@ -7,11 +7,7 @@ def unique_email() -> str:
 
 async def register_and_get_token(client: AsyncClient) -> str:
     email = unique_email()
-    # Register
     response = await client.post("/auth/register", json={"name": "Test User", "email": email, "password": "secure123"})
-    assert response.status_code == 200
-    # Login
-    response = await client.post("/auth/login", data={"username": email, "password": "secure123"})
     assert response.status_code == 200
     return response.json()["access_token"]
 
