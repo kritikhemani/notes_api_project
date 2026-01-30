@@ -63,5 +63,6 @@ async def override_get_db(db):
 # ---------- HTTP CLIENT ----------
 @pytest.fixture
 async def client():
+    transport = ASGITransport(app=app)
     async with AsyncClient(app=app, base_url="http://test") as c:
         yield c
