@@ -34,7 +34,7 @@ async def test_register_and_create_note(client: AsyncClient):
     headers = {"Authorization": f"Bearer {token}"}
 
     r = await client.post(
-        "/notes/create",
+        "/notes/create/",
         json={"title": "Test Note", "content": "This is a test"},
         headers=headers,
     )
@@ -54,12 +54,12 @@ async def test_read_note(client: AsyncClient):
     headers = {"Authorization": f"Bearer {token}"}
 
     await client.post(
-        "/notes/create",
+        "/notes/create/",
         json={"title": "Another Note", "content": "Hello"},
         headers=headers,
     )
 
-    r = await client.get("/notes/read", headers=headers)
+    r = await client.get("/notes/read/", headers=headers)
 
     assert r.status_code == 200
     assert len(r.json()) > 0
