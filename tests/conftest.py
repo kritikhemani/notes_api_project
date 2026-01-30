@@ -20,7 +20,7 @@ def event_loop():
 
 
 # ---------- ASYNC ENGINE ----------
-@pytest.fixture(scope="session")
+@pytest.fixture()
 async def async_engine():
     engine = create_async_engine(
         TEST_DATABASE_URL,
