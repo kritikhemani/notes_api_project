@@ -15,7 +15,7 @@ async def register_and_get_token(client: AsyncClient) -> str:
 async def test_register_and_create_note(client: AsyncClient):
     token = await register_and_get_token(client)
     headers = {"Authorization": f"Bearer {token}"}
-    response = await client.post("/notes/", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
+    response = await client.post("/notes/create", json={"title": "Test Note", "content": "This is a test note."}, headers=headers)
     assert response.status_code == 200
     data = response.json()
     assert data["title"] == "Test Note"
