@@ -3,6 +3,7 @@ from app.database import engine, Base
 from app.auth import router as auth_router
 from app.notes import router as notes_router
 import uvicorn
+from app.middleware import limiter
 
 app = FastAPI(title="Notes API")
 
