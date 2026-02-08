@@ -5,6 +5,7 @@ from sqlalchemy import select
 from app.models import Note
 from app.database import get_db
 from app.deps import get_current_user
+from app.middleware import limiter
 
 router = APIRouter(prefix="/notes", tags=["notes"])
 
