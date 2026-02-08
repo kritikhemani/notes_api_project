@@ -4,6 +4,7 @@ from app.auth import router as auth_router
 from app.notes import router as notes_router
 import uvicorn
 from app.middleware import limiter
+from slowapi.errors import RateLimitExceeded
 
 app = FastAPI(title="Notes API")
 
