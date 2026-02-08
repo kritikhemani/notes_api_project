@@ -10,6 +10,7 @@ from app.middleware import limiter
 router = APIRouter(prefix="/notes", tags=["notes"])
 
 @router.post("/create/", response_model=NoteRead)
+@limiter.limit("5/minute")
 async def create_note(payload: NoteCreate, db: AsyncSession = Depends(get_db), current_user=Depends(get_current_user)):
     new_note = Note(title=payload.title, content=payload.content, owner_id=current_user.id)
     db.add(new_note)
