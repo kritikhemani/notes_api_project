@@ -6,6 +6,7 @@ import uvicorn
 from app.middleware import limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
+from slowapi.util import get_remote_address
 
 app = FastAPI(title="Notes API")
 
