@@ -10,6 +10,8 @@ from slowapi.util import get_remote_address
 
 app = FastAPI(title="Notes API")
 
+app.state.limiter = limiter
+
 
 @app.get("/")
 async def home():
