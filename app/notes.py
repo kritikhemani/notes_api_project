@@ -1,5 +1,5 @@
 from app.schema import NoteCreate, NoteRead, NoteUpdate
-from fastapi import Depends, APIRouter, HTTPException, status, Query
+from fastapi import Depends, APIRouter, HTTPException, status, Query, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models import Note
