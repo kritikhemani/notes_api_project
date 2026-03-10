@@ -13,7 +13,7 @@ load_dotenv()
 # Alembic Config object
 config = context.config
 
-
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Logging
 if config.config_file_name is not None:
