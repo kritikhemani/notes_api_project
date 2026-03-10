@@ -5,8 +5,12 @@ from alembic import context
 
 from app.database import Base  # adjust import if needed
 
+import os
+
 # Alembic Config object
 config = context.config
+
+
 
 # Logging
 if config.config_file_name is not None:
