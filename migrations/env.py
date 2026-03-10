@@ -6,6 +6,7 @@ from alembic import context
 from app.database import Base  # adjust import if needed
 
 import os
+from dotenv import load_dotenv
 
 # Alembic Config object
 config = context.config
