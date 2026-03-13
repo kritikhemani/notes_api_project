@@ -64,9 +64,6 @@ platformdirs
 pluggy
 poetry
 poetry-core
-psycopg
-psycopg-binary
-psycopg2
 pyasn1
 pycparser
 pydantic
