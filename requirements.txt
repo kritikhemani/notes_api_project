@@ -3,6 +3,7 @@ annotated-doc
 annotated-types
 anyio
 asyncio
+asyncpg
 bcrypt
 build
 CacheControl
