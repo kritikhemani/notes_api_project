@@ -14,7 +14,10 @@ load_dotenv()
 config = context.config
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-DATABASE_URL = DATABASE_URL.replace("+asyncpg", "")
+
+if DATABASE_URL:
+    DATABASE_URL = DATABASE_URL.replace("+asyncpg", "")
+
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Logging
