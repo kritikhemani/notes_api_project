@@ -16,7 +16,8 @@ def hash_password(password: str) -> str:
     return pwd_context.hash(safe_password)
 
 def verify_password(password: str, hashed: str) -> bool:
-    return pwd_context.verify(password, hashed)
+    safe_password = hashlib.sha256(password.encode()).hexdigest()
+    return pwd_context.verify(safe_password, hashed)
 
 def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
     now = datetime.utcnow()
