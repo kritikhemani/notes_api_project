@@ -12,11 +12,11 @@ REFRESH_EXPIRES_DAYS = 7
 
 def hash_password(password: str) -> str:
     #Convert to fixed length (always < 72 bytes)
-    safe_password = hashlib.sha256(password.encode()).hexdigest()
+    safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return pwd_context.hash(safe_password)
 
 def verify_password(password: str, hashed: str) -> bool:
-    safe_password = hashlib.sha256(password.encode()).hexdigest()
+    safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return pwd_context.verify(safe_password, hashed)
 
 def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
