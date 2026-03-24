@@ -11,10 +11,11 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_EXPIRES_DAYS = 7
 
 def hash_password(password: str) -> str:
+    raise Exception("New hash function running")
     #Convert to fixed length (always < 72 bytes)
-    print("New hash function running")
-    safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    return pwd_context.hash(safe_password)
+    #print("New hash function running")
+    #safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
+    #return pwd_context.hash(safe_password)
 
 def verify_password(password: str, hashed: str) -> bool:
     safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
