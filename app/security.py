@@ -12,6 +12,7 @@ REFRESH_EXPIRES_DAYS = 7
 
 def hash_password(password: str) -> str:
     #Convert to fixed length (always < 72 bytes)
+    print("New hash function running")
     safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return pwd_context.hash(safe_password)
 
