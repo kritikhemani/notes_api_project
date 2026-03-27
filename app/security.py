@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from jose import jwt 
 from passlib.context import CryptContext
-import hashlib
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -11,13 +10,10 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_EXPIRES_DAYS = 7
 
 def hash_password(password: str) -> str:
-    #Convert to fixed length (always < 72 bytes)
-    safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    return pwd_context.hash(safe_password)
+    return pwd_context.hash(password)
 
 def verify_password(password: str, hashed: str) -> bool:
-    safe_password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    return pwd_context.verify(safe_password, hashed)
+    return pwd_context.verify(password, hashed)
 
 def create_token(user_id: int, token_type: str, expires: timedelta) -> str:
     now = datetime.utcnow()
