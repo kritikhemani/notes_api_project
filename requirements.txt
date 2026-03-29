@@ -67,7 +67,7 @@ poetry-core
 psycopg
 psycopg-binary
 psycopg2
-pyasn
+pyasn1
 pycparser
 pydantic
 pydantic-extra-types
