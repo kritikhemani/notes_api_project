@@ -5,7 +5,9 @@ import os
 #from dotenv import load_dotenv
 
 #load_dotenv(override=False)
-
+if os.getenv("ENV") != "ci":
+    from dotenv import load_dotenv
+    load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
