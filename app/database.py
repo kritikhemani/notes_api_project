@@ -5,9 +5,12 @@ import os
 #from dotenv import load_dotenv
 
 #load_dotenv(override=False)
-print("ENV DATABASE_URL:", os.getenv("DATABASE_URL"))
+
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set.")
 
 #Convert Railway URL to async version
 if DATABASE_URL.startswith("postgresql://"):
