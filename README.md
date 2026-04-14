@@ -15,3 +15,16 @@ A secure and scalable REST API for managing personal notes, built with **FastAPI
 - 🛡️ Security hardening (OWASP API Top-10)
 
 ---
+
+
+## 🏗️ Tech Stack
+
+- **Backend:** FastAPI
+- **Database:** PostgreSQL
+- **ORM:** SQLAlchemy
+- **Authentication:** JWT (OAuth2)
+- **Containerization:** Docker
+- **Deployment:** Render / Railway / Fly.io
+- **CI/CD:** GitHub Actions
+
+---
